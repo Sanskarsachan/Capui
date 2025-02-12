@@ -1,4 +1,4 @@
-import Button from '../lib/Button/Button';
+import { Button } from 'capui';
 
 function App() {
   return (
