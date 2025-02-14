@@ -1,9 +1,29 @@
-import { Button, Box, Typography, Badge, Icon, Layout } from "capui";
 import { FaCheckCircle, FaHome, FaSearch } from "react-icons/fa";
+import { Button, Box, Typography, Badge, Layout, Header } from "capui";
 
 function App() {
   return (
     <>
+      {/* Header Section */}
+      <Header
+        title="My Website Name"
+        subtitle="The best site ever"
+        backgroundColor="#5e6879"
+        textColor="white"
+        fontSize="1.5rem"
+        height="2rem"
+        padding="0.2rem"
+        sticky={true}
+        align="left"
+        menuItems={[
+          { label: 'Home', link: '#home' },
+          { label: 'About', link: '#about' },
+          { label: 'Contact', link: '#contact' },
+        ]}
+      >
+        {/* You can pass additional links as children if needed */}
+      </Header>
+
       <div className="bg-gray-100 min-h-screen flex flex-col items-center py-10">
         {/* Button Section */}
         <Layout

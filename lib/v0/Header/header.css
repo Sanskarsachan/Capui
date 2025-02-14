@@ -1,0 +1,128 @@
+/* Header.css */
+
+/* Default styles for the header component */
+.header {
+    background-color: #3b82f6; /* Default background color (blue) */
+    color: #ffffff; /* Default text color (white) */
+    font-size: 3rem; /* Default font size for the title */
+    height: 2rem; /* Default height for the header */
+    padding: 2rem; /* Default padding around the header */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+  }
+  
+  /* Sticky Header */
+  .header.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 50; /* Ensures the header stays on top */
+  }
+  
+  /* Header content container (flexbox for alignment) */
+  .header .header-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+  
+  /* Logo section */
+  .header .logo {
+    flex-shrink: 0; /* Prevent shrinking */
+  }
+  
+  .header .logo img {
+    height: 2rem; /* Logo image height */
+  }
+  
+  /* Title and subtitle container */
+  .header .title-container {
+    flex-grow: 1;
+    text-align: center; /* Center align by default */
+  }
+  
+  .header .subtitle {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Hamburger menu icon for mobile */
+  .header .hamburger {
+    display: none; /* Hide on larger screens */
+  }
+  
+  /* Show hamburger menu on mobile */
+  .header .hamburger.open {
+    display: block;
+  }
+  
+  /* Navigation menu (links) */
+  .header .menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  /* Hide menu on mobile when not open */
+  .header .menu.hidden {
+    display: none;
+  }
+  
+  .header .menu.show {
+    display: flex; /* Show menu when open */
+  }
+  
+  /* Menu item styling */
+  .header .menu-item {
+    margin: 0 1rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+  
+  .header .menu-item:hover {
+    text-decoration: underline; /* Hover effect for menu items */
+  }
+  
+  /* Responsive Styles for mobile devices */
+  @media (max-width: 768px) {
+    .header {
+      padding: 1rem; /* Adjust padding on smaller screens */
+    }
+  
+    .header .hamburger {
+      display: block; /* Show hamburger menu on mobile */
+    }
+  
+    .header .menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .header .menu-item {
+      margin: 0.5rem 0; /* Adjust margin for mobile items */
+    }
+  
+    .header .menu.show {
+      display: flex; /* Show menu when open */
+    }
+  }
+  
+  /* Custom classes for each header alignment (left, center, right) */
+  .header.left {
+    text-align: left;
+  }
+  
+  .header.right {
+    text-align: right;
+  }
+  
+  .header.center {
+    text-align: center;
+  }
+  

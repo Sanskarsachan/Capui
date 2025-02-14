@@ -7,8 +7,8 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-			"capui": ["lib/v0/main.ts"]
-		},
+        "capui": ["./lib/v0/main.ts"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
