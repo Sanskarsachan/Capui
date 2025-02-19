@@ -2,27 +2,50 @@ import { FaCheckCircle, FaHome, FaSearch } from "react-icons/fa";
 import { Button, Box, Typography, Badge, Layout, Header } from "capui";
 
 function App() {
+  const menuItems = [
+    { link: "/home", label: "Home" },
+    { link: "/about", label: "About" },
+    { link: "/contact", label: "Contact" }
+  ];
+
+  const dropdownItems = [
+    {
+      label: "Products",
+      items: [
+        { link: "/products/new", label: "New Arrivals" },
+        { link: "/products/featured", label: "Featured" },
+        { link: "/products/sale", label: "Sale" }
+      ]
+    },
+    {
+      label: "Services",
+      items: [
+        { link: "/services/consulting", label: "Consulting" },
+        { link: "/services/support", label: "Support" },
+        { link: "/services/training", label: "Training" }
+      ]
+    }
+  ];
   return (
     <>
       {/* Header Section */}
       <Header
-        title="My Website Name"
-        subtitle="The best site ever"
-        backgroundColor="#5e6879"
-        textColor="white"
-        fontSize="1.5rem"
-        height="2rem"
-        padding="0.2rem"
-        sticky={true}
-        align="left"
-        menuItems={[
-          { label: 'Home', link: '#home' },
-          { label: 'About', link: '#about' },
-          { label: 'Contact', link: '#contact' },
-        ]}
-      >
-        {/* You can pass additional links as children if needed */}
-      </Header>
+      title="Company Name"
+      subtitle="Welcome to our website"
+      backgroundColor="bg-blue-600"
+      textColor="text-white"
+      align="left"
+      fontSize="2xl"
+      height="lg"
+      sticky={true}
+      logo="https://placeholder.com/logo.png"
+      menuItems={menuItems}
+      dropdownItems={dropdownItems}
+    >
+      <button className="px-4 py-2 bg-white text-blue-600 rounded-md ml-4">
+        Sign In
+      </button>
+    </Header>
 
       <div className="bg-gray-100 min-h-screen flex flex-col items-center py-10">
         {/* Button Section */}
@@ -53,6 +76,19 @@ function App() {
             className="opacity-60 hover:bg-gray-300 transition-colors duration-300"
           >
             Right Aligned Button
+          </Button>
+          // Basic usage
+          <Button variant="primary">Click me</Button>
+          // Complex usage
+          <Button
+            variant="secondary"
+            size="lg"
+            shape="pill"
+            leftIcon={<FaCheckCircle name="settings" />}
+            isLoading={true}
+            fullWidth
+          >
+            Settings
           </Button>
         </Layout>
 

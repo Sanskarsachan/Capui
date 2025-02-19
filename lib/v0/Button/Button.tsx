@@ -1,44 +1,167 @@
 import type { ReactNode, ButtonHTMLAttributes, JSX } from "react";
+import "./Button.css";
 
+/**
+ * Size options for the button component
+ * @typedef {'sm' | 'md' | 'lg' | 'xl'} ButtonSize
+ */
+type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
+
+/**
+ * Shape options for the button corners
+ * @typedef {'square' | 'rounded' | 'pill'} ButtonShape
+ */
+type ButtonShape = 'square' | 'rounded' | 'pill';
+
+/**
+ * Properties for the Button component
+ * @extends ButtonHTMLAttributes<HTMLButtonElement>
+ */
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Content to be rendered inside the button */
   children: ReactNode;
-  variant?: "primary" | "secondary" | "danger" | "outline";
-  align?: "left" | "center" | "right"; // New align prop
+  
+  /** Visual style variant of the button 
+   * @default "primary"
+   */
+  variant?: "primary" | "secondary" | "danger" | "outline" | "ghost";
+  
+  /** Horizontal alignment within container 
+   * @default "center"
+   */
+  align?: "left" | "center" | "right";
+  
+  /** Size preset for the button 
+   * @default "md"
+   */
+  size?: ButtonSize;
+  
+  /** Corner shape style 
+   * @default "rounded"
+   */
+  shape?: ButtonShape;
+  
+  /** Whether the button should take full width 
+   * @default false
+   */
+  fullWidth?: boolean;
+  
+  /** Loading state - disables button and shows spinner 
+   * @default false
+   */
+  isLoading?: boolean;
+  
+  /** Whether to show a subtle animation on hover 
+   * @default true
+   */
+  animated?: boolean;
+  
+  /** Custom icon to show before the button text */
+  leftIcon?: ReactNode;
+  
+  /** Custom icon to show after the button text */
+  rightIcon?: ReactNode;
 }
 
+/**
+ * A highly customizable button component that supports multiple variants,
+ * sizes, shapes, and states. Includes support for icons, loading states,
+ * and animations.
+ *
+ * @example
+ * // Basic usage
+ * <Button variant="primary">Click me</Button>
+ *
+ * @example
+ * // With icons and loading state
+ * <Button 
+ *   variant="secondary"
+ *   leftIcon={<Icon name="settings" />}
+ *   isLoading={true}
+ *   size="lg"
+ * >
+ *   Settings
+ * </Button>
+ */
 const Button = ({
   children,
-  variant = "primary", 
-  align = "center", // Default to center alignment
+  variant = "primary",
+  align = "center",
+  size = "md",
+  shape = "rounded",
+  fullWidth = false,
+  isLoading = false,
+  animated = true,
+  leftIcon,
+  rightIcon,
   className = "",
+  disabled,
   ...props
 }: ButtonProps): JSX.Element => {
-  // Base classes for the button
-  const baseClasses =
-    "py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2";
-
-  // Add variant-based styles
+  // Compose class names based on props
+  const baseClasses = "button";
+  
   const variantClasses = {
-    primary: "bg-blue-500 text-white hover:bg-blue-600",
-    secondary: "bg-gray-500 text-white hover:bg-gray-600",
-    danger: "bg-red-500 text-white hover:bg-red-600",
-    outline: "border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white",
+    primary: "button-primary",
+    secondary: "button-secondary",
+    danger: "button-danger",
+    outline: "button-outline",
+    ghost: "button-ghost"
   };
 
-  // Alignment handling (wrap the button in a container div with flex)
+  const sizeClasses = {
+    sm: "button-sm",
+    md: "button-md",
+    lg: "button-lg",
+    xl: "button-xl"
+  };
+
+  const shapeClasses = {
+    square: "button-square",
+    rounded: "button-rounded",
+    pill: "button-pill"
+  };
+
   const alignmentClasses = {
-    left: "flex justify-start",
-    center: "flex justify-center",
-    right: "flex justify-end",
+    left: "button-left",
+    center: "button-center",
+    right: "button-right"
   };
 
-  // Combine all the classNames
-  const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${className}`;
+  // Combine all classes conditionally
+  const buttonClasses = [
+    baseClasses,
+    variantClasses[variant],
+    sizeClasses[size],
+    shapeClasses[shape],
+    fullWidth ? 'button-full-width' : '',
+    isLoading ? 'button-loading' : '',
+    animated ? 'button-animated' : '',
+    disabled ? 'button-disabled' : '',
+    className
+  ].filter(Boolean).join(' ');
 
   return (
-    <div className={alignmentClasses[align]}>
-      <button className={buttonClasses} {...props}>
-        {children}
+    <div className={`button-container ${alignmentClasses[align]} ${fullWidth ? 'w-full' : ''}`}>
+      <button 
+        className={buttonClasses}
+        disabled={disabled || isLoading}
+        {...props}
+      >
+        {isLoading && (
+          <span className="button-spinner" aria-hidden="true" />
+        )}
+        {leftIcon && (
+          <span className="button-icon button-icon-left">
+            {leftIcon}
+          </span>
+        )}
+        <span className="button-content">{children}</span>
+        {rightIcon && (
+          <span className="button-icon button-icon-right">
+            {rightIcon}
+          </span>
+        )}
       </button>
     </div>
   );

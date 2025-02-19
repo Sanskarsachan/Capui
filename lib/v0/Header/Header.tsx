@@ -1,119 +1,203 @@
 import React, { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import './header.css'; // Importing the CSS file for styling
+import { FaCheckCircle } from "react-icons/fa";
+import './header.css'
 
-/**
- * Header component for creating a flexible and customizable header for React-based projects.
- * It supports both mobile and desktop views, offering a collapsible menu on smaller screens.
- * The component allows for custom titles, subtitles, logos, background colors, text colors, and more.
- * 
- * @component
- * 
- * @param {ReactNode} title - The main title to display in the header.
- * @param {ReactNode} [subtitle] - Optional subtitle to display below the title.
- * @param {string} [backgroundColor='#3b82f6'] - Background color of the header (defaults to blue).
- * @param {string} [textColor='#ffffff'] - Text color of the header (defaults to white).
- * @param {'left' | 'center' | 'right'} [align='center'] - Alignment of the title in the header.
- * @param {string} [fontSize='3rem'] - Font size for the title (defaults to 3rem).
- * @param {string} [height='5rem'] - Height of the header (defaults to 5rem).
- * @param {string} [padding='1rem'] - Padding around the header (defaults to 1rem).
- * @param {string} [className=''] - Custom class names for additional styling.
- * @param {ReactNode} [children] - Additional content, typically menu items or actions, to display in the header.
- * @param {string | ReactNode} [logo] - A logo, either a URL string or a JSX element, to display on the left side of the header.
- * @param {boolean} [sticky=false] - Whether to make the header sticky at the top of the page when scrolling.
- * @param {Array} [menuItems=[]] - Array of objects representing menu items with 'label' and 'link' properties for the navigation menu.
- * 
- * @returns {JSX.Element} The rendered Header component.
- */
-
-// Define the HeaderProps type
 type HeaderProps = {
   title: React.ReactNode;
   subtitle?: React.ReactNode;
   backgroundColor?: string;
   textColor?: string;
   align?: 'left' | 'center' | 'right';
-  fontSize?: string;
-  height?: string;
-  padding?: string;
+  fontSize?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+  height?: 'sm' | 'md' | 'lg' | 'xl';
+  padding?: 'sm' | 'md' | 'lg';
   className?: string;
   children?: React.ReactNode;
   logo?: string | React.ReactNode;
   sticky?: boolean;
-  menuItems?: { link: string | undefined; label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }[];
+  menuItems?: { link: string | undefined; label: React.ReactNode }[];
+  dropdownItems?: { label: string; items: { link: string; label: string }[] }[];
 };
 
 const Header = ({
   title,
   subtitle,
-  backgroundColor = '#3b82f6', // Default bg-blue-500
-  textColor = '#ffffff', // Default text-white
+  backgroundColor = 'bg-blue-500',
+  textColor = 'text-white',
   align = 'center',
-  fontSize = '1rem',
-  height = '2rem',
-  padding = '1rem',
+  fontSize = 'xl',
+  height = 'md',
+  padding = 'md',
   className = '',
   children,
   logo,
   sticky = false,
-  menuItems = [], // Default empty menu
+  menuItems = [],
+  dropdownItems = []
 }: HeaderProps): JSX.Element => {
-  // State for the hamburger menu in mobile view
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdowns, setOpenDropdowns] = useState<Record<string, boolean>>({});
 
-  // Toggle the mobile menu open/close
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  
+  const toggleDropdown = (label: string) => {
+    setOpenDropdowns(prev => ({
+      ...prev,
+      [label]: !prev[label]
+    }));
+  };
 
-  // Dynamic styles based on passed props
-  const headerStyle = {
-    backgroundColor,
-    color: textColor,
-    fontSize,
-    height,
-    padding,
-  } as React.CSSProperties;
+  const heightClasses = {
+    sm: 'h-12',
+    md: 'h-16',
+    lg: 'h-20',
+    xl: 'h-24'
+  };
+
+  const paddingClasses = {
+    sm: 'px-2 py-1',
+    md: 'px-4 py-2',
+    lg: 'px-6 py-3'
+  };
+
+  const fontSizeClasses = {
+    sm: 'text-sm',
+    md: 'text-base',
+    lg: 'text-lg',
+    xl: 'text-xl',
+    '2xl': 'text-2xl',
+    '3xl': 'text-3xl'
+  };
+
+  const alignClasses = {
+    left: 'text-left',
+    center: 'text-center',
+    right: 'text-right'
+  };
 
   return (
-    <header
-      className={`header ${align} ${sticky ? 'sticky' : ''} ${className}`}
-      style={headerStyle}
-    >
-      <div className="header-content">
-        {/* Logo Section: Displays logo if passed */}
-        {logo && (
-          <div className="logo">
-            {typeof logo === 'string' ? (
-              <img src={logo} alt="Logo" />
-            ) : (
-              logo
+    <header className={`
+      w-full ${backgroundColor} ${textColor}
+      ${heightClasses[height]} ${paddingClasses[padding]}
+      ${sticky ? 'sticky top-0 z-50' : ''}
+      transition-colors duration-300 ease-in-out
+      ${className}
+    `}>
+      <div className="max-w-7xl mx-auto flex flex-col">
+        {/* Main header content */}
+        <div className="flex items-center justify-between w-full">
+          {/* Logo section */}
+          {logo && (
+            <div className="flex-shrink-0">
+              {typeof logo === 'string' ? (
+                <img src={logo} alt="Logo" className="h-8 w-auto" />
+              ) : (
+                logo
+              )}
+            </div>
+          )}
+
+          {/* Title and subtitle */}
+          <div className={`flex-grow ${alignClasses[align]}`}>
+            <h1 className={`${fontSizeClasses[fontSize]} font-bold`}>
+              {title}
+            </h1>
+            {subtitle && (
+              <p className="text-sm mt-1 opacity-90">
+                {subtitle}
+              </p>
             )}
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={toggleMenu}
+            className="lg:hidden p-2 rounded-md hover:bg-opacity-20 hover:bg-black"
+          >
+            {menuOpen ? <FaCheckCircle size={24} /> : <FaCheckCircle size={24} />}
+          </button>
+
+          {/* Desktop navigation */}
+          <nav className="hidden lg:flex items-center space-x-4">
+            {menuItems.map((item, index) => (
+              <a
+                key={index}
+                href={item.link}
+                className="px-3 py-2 rounded-md hover:bg-opacity-20 hover:bg-black transition-colors duration-200"
+              >
+                {item.label}
+              </a>
+            ))}
+            
+            {/* Desktop Dropdowns */}
+            {dropdownItems.map((dropdown, index) => (
+              <div key={index} className="relative">
+                <button
+                  onClick={() => toggleDropdown(dropdown.label)}
+                  className="flex items-center px-3 py-2 rounded-md hover:bg-opacity-20 hover:bg-black transition-colors duration-200"
+                >
+                  {dropdown.label}
+                  <FaCheckCircle size={16} className="ml-1" />
+                </button>
+                {openDropdowns[dropdown.label] && (
+                  <div className="absolute top-full right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    {dropdown.items.map((item, idx) => (
+                      <a
+                        key={idx}
+                        href={item.link}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+            {children}
+          </nav>
+        </div>
+
+        {/* Mobile navigation */}
+        {menuOpen && (
+          <nav className="lg:hidden mt-2 space-y-1">
+            {menuItems.map((item, index) => (
+              <a
+                key={index}
+                href={item.link}
+                className="block px-3 py-2 rounded-md hover:bg-opacity-20 hover:bg-black transition-colors duration-200"
+              >
+                {item.label}
+              </a>
+            ))}
+            {/* Mobile Dropdowns */}
+            {dropdownItems.map((dropdown, index) => (
+              <div key={index}>
+                <button
+                  onClick={() => toggleDropdown(dropdown.label)}
+                  className="flex items-center w-full px-3 py-2 rounded-md hover:bg-opacity-20 hover:bg-black transition-colors duration-200"
+                >
+                  {dropdown.label}
+                  <FaCheckCircle size={16} className="ml-1" />
+                </button>
+                {openDropdowns[dropdown.label] && (
+                  <div className="pl-4 space-y-1">
+                    {dropdown.items.map((item, idx) => (
+                      <a
+                        key={idx}
+                        href={item.link}
+                        className="block px-3 py-2 rounded-md hover:bg-opacity-20 hover:bg-black transition-colors duration-200"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+            {children}
+          </nav>
         )}
-
-        {/* Title and Subtitle Section */}
-        <div className="title-container">
-          <h1>{title}</h1>
-          {subtitle && <p className="subtitle">{subtitle}</p>}
-        </div>
-
-        {/* Hamburger Menu for Mobile: Displayed only on mobile screens */}
-        <div className="hamburger" onClick={toggleMenu}>
-          {menuOpen ? (
-            <FaTimes className="text-white text-2xl cursor-pointer" />
-          ) : (
-            <FaBars className="text-white text-2xl cursor-pointer" />
-          )}
-        </div>
-      </div>
-
-      {/* Menu Links: Displayed as a horizontal list on desktop and collapsible on mobile */}
-      <div className={`menu ${menuOpen ? 'show' : 'hidden'}`}>
-        {menuItems?.map((item: { link: string | undefined; label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }, index: React.Key | null | undefined) => (
-          <a href={item.link} key={index} className="menu-item">
-            {item.label}
-          </a>
-        ))}
-        {children}
       </div>
     </header>
   );
