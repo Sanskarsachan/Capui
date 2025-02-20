@@ -2,52 +2,36 @@ import { FaCheckCircle, FaHome, FaSearch } from "react-icons/fa";
 import { Button, Box, Typography, Badge, Layout, Header } from "capui";
 
 function App() {
-  const menuItems = [
-    { link: "/home", label: "Home" },
-    { link: "/about", label: "About" },
-    { link: "/contact", label: "Contact" }
-  ];
-
-  const dropdownItems = [
-    {
-      label: "Products",
-      items: [
-        { link: "/products/new", label: "New Arrivals" },
-        { link: "/products/featured", label: "Featured" },
-        { link: "/products/sale", label: "Sale" }
-      ]
-    },
-    {
-      label: "Services",
-      items: [
-        { link: "/services/consulting", label: "Consulting" },
-        { link: "/services/support", label: "Support" },
-        { link: "/services/training", label: "Training" }
-      ]
-    }
-  ];
   return (
     <>
       {/* Header Section */}
       <Header
-      title="Company Name"
-      subtitle="Welcome to our website"
-      backgroundColor="bg-blue-600"
-      textColor="text-white"
+      title="Capui"
+      subtitle="Next gen UI"
+      backgroundColor="#3b82f6"
+      textColor="white"
       align="left"
       fontSize="2xl"
-      height="lg"
+      height="sm"
       sticky={true}
-      logo="https://placeholder.com/logo.png"
-      menuItems={menuItems}
-      dropdownItems={dropdownItems}
+      menuItems={[
+        { link: "/home", label: "Home" },
+        { link: "/about", label: "About" }
+      ]}
+      dropdownItems={[
+        {
+          label: "Products",
+          items: [
+            { link: "/products/new", label: "New" },
+            { link: "/products/featured", label: "Featured" }
+          ]
+        }
+      ]}
     >
-      <button className="px-4 py-2 bg-white text-blue-600 rounded-md ml-4">
-        Sign In
-      </button>
+      <button className="header-button">Sign In</button>
     </Header>
 
-      <div className="bg-gray-100 min-h-screen flex flex-col items-center py-10">
+      <div className="bg-gray-100 min-h-screen flex flex-col items-center ">
         {/* Button Section */}
         <Layout
           direction="row"
