@@ -1,4 +1,4 @@
-import { FaCheckCircle, FaHome, FaSearch } from "react-icons/fa";
+import { FaCheckCircle, FaHome } from "react-icons/fa";
 import { Button, Box, Typography, Badge, Layout, Header } from "capui";
 
 function App() {
@@ -6,30 +6,29 @@ function App() {
     <>
       {/* Header Section */}
       <Header
-      title="Capui"
-      subtitle="Next gen UI"
-      backgroundColor="#3b82f6"
-      textColor="white"
-      align="left"
-      fontSize="2xl"
-      height="sm"
-      sticky={true}
-      menuItems={[
-        { link: "/home", label: "Home" },
-        { link: "/about", label: "About" }
-      ]}
-      dropdownItems={[
-        {
-          label: "Products",
-          items: [
-            { link: "/products/new", label: "New" },
-            { link: "/products/featured", label: "Featured" }
-          ]
-        }
-      ]}
-    >
-      <button className="header-button">Sign In</button>
-    </Header>
+        title="My App"
+        subtitle="Welcome to the future"
+        gradient={true}
+        glassmorphism={true}
+        sticky={true}
+        align="left"
+        fontSize="2xl"
+        menuItems={[
+          { link: "/home", label: "Home" },
+          { link: "/about", label: "About" },
+        ]}
+        dropdownItems={[
+          {
+            label: "Products",
+            items: [
+              { link: "/new", label: "New Arrivals" },
+              { link: "/featured", label: "Featured" },
+            ],
+          },
+        ]}
+      >
+        <button className="header-button">Sign In</button>
+      </Header>
 
       <div className="bg-gray-100 min-h-screen flex flex-col items-center ">
         {/* Button Section */}

@@ -1,7 +1,6 @@
-// Header.tsx
-import React, { useState } from "react";
-import { FaHome } from "react-icons/fa";
-import "./Header.css";
+import React, { useState, useEffect } from "react";
+import { FaHome, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import './header.css'
 
 type HeaderProps = {
   title: React.ReactNode;
@@ -14,18 +13,20 @@ type HeaderProps = {
   padding?: "sm" | "md" | "lg";
   className?: string;
   children?: React.ReactNode;
-  logo?: string | React.ReactNode; // Allow either string or ReactNode for logo
+  logo?: string | React.ReactNode;
   sticky?: boolean;
   menuItems?: { link: string | undefined; label: React.ReactNode }[];
   dropdownItems?: { label: string; items: { link: string; label: string }[] }[];
+  glassmorphism?: boolean;
+  gradient?: boolean;
 };
 
 const Header = ({
   title,
   subtitle,
-  backgroundColor,
-  textColor,
-  align = "center",
+  backgroundColor = "transparent",
+  textColor = "white",
+  align = "left",
   fontSize = "xl",
   height = "md",
   padding = "md",
@@ -35,11 +36,25 @@ const Header = ({
   sticky = false,
   menuItems = [],
   dropdownItems = [],
+  glassmorphism = false,
+  gradient = true,
 }: HeaderProps): JSX.Element => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdowns, setOpenDropdowns] = useState<Record<string, boolean>>(
     {}
   );
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    if (sticky) {
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [sticky]);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -50,67 +65,62 @@ const Header = ({
     }));
   };
 
-  const headerStyle = {
-    backgroundColor,
-    color: textColor,
-  } as React.CSSProperties;
+  const headerClasses = `
+    header 
+    header-height-${height} 
+    header-padding-${padding} 
+    header-align-${align}
+    font-size-${fontSize}
+    ${sticky ? "header-sticky" : ""}
+    ${scrolled ? "header-scrolled" : ""}
+    ${glassmorphism ? "header-glass" : ""}
+    ${gradient ? "header-gradient" : ""}
+    ${className}
+  `;
 
   return (
     <header
-      className={`
-        header 
-        header-height-${height} 
-        header-padding-${padding} 
-        header-align-${align}
-        font-size-${fontSize}
-        ${sticky ? "header-sticky" : ""}
-        ${className}
-      `}
-      style={headerStyle}
+      className={headerClasses}
+      style={{ backgroundColor, color: textColor }}
     >
       <div className="header-container">
         <div className="header-content">
-          {/* Logo section - If no logo is passed, use FaHome as default */}
-          <div className="header-logo">
+          <div className="header-logo-section">
             {logo ? (
               typeof logo === "string" ? (
-                <img src={logo} alt="Logo" />
+                <img src={logo} alt="Logo" className="header-logo-img" />
               ) : (
                 logo
               )
             ) : (
-              <FaHome size={40} color={textColor || "#ffffff"} />
+              <FaHome className="header-default-logo" />
             )}
           </div>
 
-          {/* Title and subtitle */}
-          <div className={`header-title-container header-align-${align}`}>
+          <div className={`header-title-section header-align-${align}`}>
             <h1 className="header-title">{title}</h1>
             {subtitle && <p className="header-subtitle">{subtitle}</p>}
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={toggleMenu}
             className="header-mobile-toggle"
             aria-label="Toggle menu"
           >
-            <span className={`hamburger-icon ${menuOpen ? "open" : ""}`}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
+            {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
 
-          {/* Desktop navigation */}
           <nav className="header-nav-desktop">
             {menuItems.map((item, index) => (
-              <a key={index} href={item.link} className="header-nav-item">
+              <a
+                key={index}
+                href={item.link}
+                className="header-nav-item header-nav-link"
+              >
                 {item.label}
               </a>
             ))}
 
-            {/* Desktop Dropdowns */}
             {dropdownItems.map((dropdown, index) => (
               <div key={index} className="header-dropdown">
                 <button
@@ -118,7 +128,11 @@ const Header = ({
                   className="header-dropdown-toggle"
                 >
                   {dropdown.label}
-                  <span className="dropdown-arrow"></span>
+                  <FaChevronDown
+                    className={`dropdown-arrow ${
+                      openDropdowns[dropdown.label] ? "open" : ""
+                    }`}
+                  />
                 </button>
                 {openDropdowns[dropdown.label] && (
                   <div className="header-dropdown-content">
@@ -139,14 +153,17 @@ const Header = ({
           </nav>
         </div>
 
-        {/* Mobile navigation */}
         <nav className={`header-nav-mobile ${menuOpen ? "show" : ""}`}>
           {menuItems.map((item, index) => (
-            <a key={index} href={item.link} className="header-nav-item-mobile">
+            <a
+              key={index}
+              href={item.link}
+              className="header-nav-item-mobile"
+              onClick={() => setMenuOpen(false)}
+            >
               {item.label}
             </a>
           ))}
-          {/* Mobile Dropdowns */}
           {dropdownItems.map((dropdown, index) => (
             <div key={index} className="header-dropdown-mobile">
               <button
@@ -154,11 +171,11 @@ const Header = ({
                 className="header-dropdown-toggle-mobile"
               >
                 {dropdown.label}
-                <span
+                <FaChevronDown
                   className={`dropdown-arrow ${
                     openDropdowns[dropdown.label] ? "open" : ""
                   }`}
-                ></span>
+                />
               </button>
               {openDropdowns[dropdown.label] && (
                 <div className="header-dropdown-content-mobile">
@@ -167,6 +184,7 @@ const Header = ({
                       key={idx}
                       href={item.link}
                       className="header-dropdown-item-mobile"
+                      onClick={() => setMenuOpen(false)}
                     >
                       {item.label}
                     </a>
