@@ -5,30 +5,31 @@ function App() {
   return (
     <>
       {/* Header Section */}
+      <Header />
+
       <Header
-        title="My App"
-        subtitle="Welcome to the future"
-        gradient={true}
-        glassmorphism={true}
-        sticky={true}
-        align="left"
-        fontSize="2xl"
-        menuItems={[
-          { link: "/home", label: "Home" },
-          { link: "/about", label: "About" },
-        ]}
-        dropdownItems={[
+        logo={<img src="/logo.svg" alt="Company Logo" />}
+        navigationItems={[
           {
             label: "Products",
-            items: [
-              { link: "/new", label: "New Arrivals" },
-              { link: "/featured", label: "Featured" },
-            ],
+            items: ["Features", "Pricing"],
+            href: "/products",
+          },
+          {
+            label: "Resources",
+            items: ["Blog", "Documentation"],
+            href: "/resources",
           },
         ]}
-      >
-        <button className="header-button">Sign In</button>
-      </Header>
+        containerWidth="contained"
+        height="h-20"
+        position="sticky"
+        backgroundColor="bg-white"
+        textColor="text-gray-900"
+        shadow="lg"
+        padding="px-6"
+        onMobileMenuToggle={(isOpen) => console.log("Mobile menu:", isOpen)}
+      />
 
       <div className="bg-gray-100 min-h-screen flex flex-col items-center ">
         {/* Button Section */}
