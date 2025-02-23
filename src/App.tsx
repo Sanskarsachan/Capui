@@ -5,10 +5,8 @@ function App() {
   return (
     <>
       {/* Header Section */}
-      <Header />
-
       <Header
-        logo={<img src="/logo.svg" alt="Company Logo" />}
+        logo={<img src="/logo.svg" alt="Capui" />}
         navigationItems={[
           {
             label: "Products",
@@ -110,16 +108,22 @@ function App() {
             height="h-64"
             className="bg-gradient-to-r from-gray-600 to-gray-800 rounded-lg shadow-lg"
           >
-            <Typography variant="h2" fontSize="text-2xl" fontWeight="semibold">
-              Box with Custom Text Color
-            </Typography>
             <Typography
-              variant="p"
-              fontSize="text-base"
-              lineHeight="leading-relaxed"
+              variant="h1"
+              textAlign="center"
+              fontWeight="bold"
+              margin="20px"
+              padding="10px"
             >
-              The text inside this box is white, and the height is set to 16rem
-              (h-64).
+              This is an H1 Heading
+            </Typography>
+
+            <Typography variant="p" color="gray" fontSize="18px">
+              This is a paragraph with customized font size.
+            </Typography>
+
+            <Typography variant="small" color="blue" textAlign="right">
+              This is some small text aligned to the right.
             </Typography>
           </Box>
         </Layout>

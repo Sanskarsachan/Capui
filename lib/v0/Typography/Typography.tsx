@@ -1,4 +1,5 @@
-import { JSX, ReactNode } from "react";
+import React, { JSX, ReactNode } from "react";
+import "./typography.css"; // Import the regular CSS file
 
 interface TypographyProps {
   children: ReactNode;
@@ -19,23 +20,40 @@ const Typography = ({
   variant = "p", // Default to 'p' for paragraph
   textAlign = "left",
   fontWeight = "normal",
-  fontSize = "text-base",
-  lineHeight = "leading-normal",
-  letterSpacing = "tracking-normal",
-  color = "text-black",
+  fontSize = "1rem",
+  lineHeight = "1.5",
+  letterSpacing = "normal",
+  color = "black",
   margin = "",
   padding = "",
   className = "",
 }: TypographyProps): JSX.Element => {
-  // Mapping variant to the respective HTML tag
+  // Map variant to corresponding CSS class
   const Tag = variant;
+  const variantClass = `${variant}`;
 
-  // Combining classes
-  const typographyClasses = `${fontSize} ${lineHeight} ${letterSpacing} ${color} ${
-    textAlign ? `text-${textAlign}` : ""
-  } ${fontWeight} ${margin} ${padding} ${className}`;
+  // Dynamically set styles based on props
+  const textAlignClass = `text-${textAlign}`;
+  const fontWeightClass = fontWeight;
 
-  return <Tag className={typographyClasses}>{children}</Tag>;
+  // Create inline styles for fontSize, lineHeight, letterSpacing, color, margin, and padding
+  const customStyles = {
+    fontSize,
+    lineHeight,
+    letterSpacing,
+    color,
+    margin,
+    padding,
+  };
+
+  return (
+    <Tag
+      className={`typography ${variantClass} ${textAlignClass} ${fontWeightClass} ${className}`}
+      style={customStyles}
+    >
+      {children}
+    </Tag>
+  );
 };
 
 export default Typography;

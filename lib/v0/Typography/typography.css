@@ -1,0 +1,96 @@
+/* typography.css */
+
+/* Common text styles */
+.typography {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.h3 {
+  font-size: 1.75rem;
+  font-weight: semibold;
+}
+
+.h4 {
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.h5 {
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+.h6 {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.p {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.span {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.small {
+  font-size: 0.875rem;
+  font-weight: normal;
+}
+
+/* Text alignment */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+/* Font weight */
+.light {
+  font-weight: 300;
+}
+
+.normal {
+  font-weight: 400;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+/* Additional utilities */
+.margin {
+  margin: var(--margin, 0);
+}
+
+.padding {
+  padding: var(--padding, 0);
+}
