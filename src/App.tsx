@@ -59,9 +59,9 @@ function App() {
           >
             Right Aligned Button
           </Button>
-          // Basic usage
+          {/* Basic usage */}
           <Button variant="primary">Click me</Button>
-          // Complex usage
+          {/* Complex usage */}
           <Button
             variant="secondary"
             size="lg"
@@ -77,13 +77,15 @@ function App() {
         {/* Box Section 1 */}
         <Layout justify="center" className="mb-10">
           <Box
-            center
-            borderColor="black"
-            fillColor="bg-gradient-to-r from-green-400 to-blue-500"
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            backgroundColor="bg-gradient-to-r from-green-400 to-blue-500"
             margin="m-10"
             padding="p-8"
-            shadow="lg"
-            rounded="lg"
+            boxShadow="lg"
+            borderRadius="lg"
           >
             <Typography
               variant="h2"
@@ -104,9 +106,11 @@ function App() {
         <Layout justify="center" className="mb-10">
           <Box
             padding="p-6"
-            textColor="white"
+            backgroundColor="bg-gradient-to-r from-gray-600 to-gray-800"
+            color="white"
             height="h-64"
-            className="bg-gradient-to-r from-gray-600 to-gray-800 rounded-lg shadow-lg"
+            borderRadius="lg"
+            boxShadow="lg"
           >
             <Typography
               variant="h1"
@@ -131,13 +135,17 @@ function App() {
         {/* Box Section 3 */}
         <Layout justify="center" className="mb-10">
           <Box
-            borderColor="white"
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            backgroundColor="bg-indigo-500"
+            border="1px solid white"
             margin="m-10"
             padding="p-8"
+            boxShadow="sm"
+            borderRadius="md"
             width="w-1/2"
-            shadow="sm"
-            fillColor="bg-indigo-500"
-            rounded="md"
           >
             <Typography
               variant="h2"
@@ -157,9 +165,12 @@ function App() {
         {/* Full Screen Box Section */}
         <Layout justify="center" className="mb-10">
           <Box
-            fillColor="bg-gradient-to-r from-teal-400 to-blue-500"
+                      backgroundColor="bg-gradient-to-r from-teal-400 to-blue-500"
             height="h-screen"
-            center
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
           >
             <Typography
               variant="h1"

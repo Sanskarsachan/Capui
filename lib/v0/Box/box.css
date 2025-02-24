@@ -1,0 +1,45 @@
+/* Box.css */
+
+/* Basic styling for the Box component */
+.box {
+  box-sizing: border-box;
+}
+
+/* Flexbox layout helpers */
+.box.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.box.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.box.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.box.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 600px) {
+  .box.sm {
+    /* Custom small screen styles can be added here */
+  }
+}
+
+@media (max-width: 900px) {
+  .box.md {
+    /* Custom medium screen styles can be added here */
+  }
+}
+
+@media (max-width: 1200px) {
+  .box.lg {
+    /* Custom large screen styles can be added here */
+  }
+}
