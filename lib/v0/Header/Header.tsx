@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import Dropdown from '../Dropdown/Dropdown';
 import './Header.css';
 
 interface NavItem {
@@ -127,88 +129,38 @@ const Header: React.FC<HeaderProps> = ({
       role="banner"
     >
       <div className={containerClasses}>
-        <div className="nav-bar">
+        <div className="nav-bar flex items-center justify-between">
           {/* Logo */}
           <div className={`logo ${logoClassName}`}>
-            {typeof logo === 'string' ? <span>{logo}</span> : logo}
+            {typeof logo === 'string' ? (
+              <span className="text-xl font-bold text-gray-800">{logo}</span>
+            ) : (
+              logo
+            )}
           </div>
 
           {/* Desktop Navigation */}
           <nav className={`nav-desktop ${navClassName}`} role="navigation">
             {navigationItems.map(({ label, items, href }) => (
-              <div
+              <Dropdown
                 key={label}
-                className={`nav-item ${activeDropdown === label ? 'active' : ''}`}
-              >
-                <button
-                  className="nav-button"
-                  onClick={() => toggleDropdown(label)}
-                  aria-expanded={activeDropdown === label}
-                  aria-haspopup="true"
-                >
-                  {label}
-                  <svg
-                    className="chevron"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path
-                      d="M6 9l6 6 6-6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-                <div className={`dropdown ${dropdownClassName}`} role="menu">
-                  {items.map((item) => (
-                    <a 
-                      key={item} 
-                      href={href || '#'} 
-                      className="dropdown-item" 
-                      role="menuitem"
-                    >
-                      {item}
-                    </a>
-                  ))}
-                </div>
-              </div>
+                label={label}
+                items={items}
+                href={href}
+                isOpen={activeDropdown === label}
+                onToggle={toggleDropdown}
+              />
             ))}
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="mobile-menu-button"
+            className="mobile-menu-button text-2xl text-gray-800"
             onClick={toggleMenu}
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-            >
-              {isMenuOpen ? (
-                <path
-                  d="M18 6L6 18M6 6l12 12"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              ) : (
-                <path
-                  d="M4 6h16M4 12h16M4 18h16"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              )}
-            </svg>
+            {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
 
@@ -218,44 +170,14 @@ const Header: React.FC<HeaderProps> = ({
           role="navigation"
         >
           {navigationItems.map(({ label, items, href }) => (
-            <div
+            <Dropdown
               key={label}
-              className={`mobile-nav-item ${activeDropdown === label ? 'active' : ''}`}
-            >
-              <button
-                className="mobile-nav-button"
-                onClick={() => toggleDropdown(label)}
-                aria-expanded={activeDropdown === label}
-              >
-                {label}
-                <svg
-                  className="chevron"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M6 9l6 6 6-6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-              <div className="mobile-dropdown">
-                {items.map((item) => (
-                  <a 
-                    key={item} 
-                    href={href || '#'} 
-                    className="mobile-dropdown-item"
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
-            </div>
+              label={label}
+              items={items}
+              href={href}
+              isOpen={activeDropdown === label}
+              onToggle={toggleDropdown}
+            />
           ))}
         </nav>
       </div>

@@ -6,28 +6,30 @@ function App() {
     <>
       {/* Header Section */}
       <Header
-        logo={<img src="/logo.svg" alt="Capui" />}
-        navigationItems={[
-          {
-            label: "Products",
-            items: ["Features", "Pricing"],
-            href: "/products",
-          },
-          {
-            label: "Resources",
-            items: ["Blog", "Documentation"],
-            href: "/resources",
-          },
-        ]}
-        containerWidth="contained"
-        height="h-20"
-        position="sticky"
-        backgroundColor="bg-white"
-        textColor="text-gray-900"
-        shadow="lg"
-        padding="px-6"
-        onMobileMenuToggle={(isOpen) => console.log("Mobile menu:", isOpen)}
-      />
+      logo={<img src="/logo.svg" alt="Capui" className="w-auto h-10" />}
+      navigationItems={[
+        {
+          label: "Products",
+          items: ["Features", "Pricing"],
+          href: "/products",
+        },
+        {
+          label: "Resources",
+          items: ["Blog", "Documentation"],
+          href: "/resources",
+        },
+      ]}
+      containerWidth="contained"
+      height="h-20"
+      position="sticky"
+      backgroundColor="bg-white"
+      textColor="text-gray-900"
+      activeTextColor="text-blue-600" // Example active color for text
+      hoverTextColor="text-gray-600"  // Example hover color for text
+      shadow="lg"
+      padding="px-6"
+      onMobileMenuToggle={(isOpen) => console.log("Mobile menu:", isOpen)}
+    />
 
       <div className="bg-gray-100 min-h-screen flex flex-col items-center">
         {/* Box Section 1 */}
