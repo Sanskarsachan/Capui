@@ -1,0 +1,129 @@
+/* Badge.css */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem; /* Default rounded-md */
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .badge.small {
+    font-size: 0.75rem; /* Text size for sm */
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .badge.medium {
+    font-size: 1rem; /* Text size for md */
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .badge.large {
+    font-size: 1.25rem; /* Text size for lg */
+    padding: 0.5rem 1rem;
+  }
+  
+  .badge.solid {
+    background-color: #1c64f2;
+    color: white;
+    border: none;
+  }
+  
+  .badge.outline {
+    background-color: transparent;
+    border: 2px solid #1c64f2;
+    color: #1c64f2;
+  }
+  
+  .badge.blue {
+    background-color: #1c64f2;
+  }
+  
+  .badge.green {
+    background-color: #48bb78;
+  }
+  
+  .badge.red {
+    background-color: #f56565;
+  }
+  
+  .badge.yellow {
+    background-color: #ecc94b;
+  }
+  
+  .badge.gray {
+    background-color: #a0aec0;
+  }
+  
+  .badge.purple {
+    background-color: #9f7aea;
+  }
+  
+  .badge.pink {
+    background-color: #fbb6ce;
+  }
+  
+  .badge.orange {
+    background-color: #ed8936;
+  }
+  
+  .badge.text-white {
+    color: white;
+  }
+  
+  .badge.text-black {
+    color: black;
+  }
+  
+  .badge.rounded-none {
+    border-radius: 0;
+  }
+  
+  .badge.rounded-sm {
+    border-radius: 0.125rem;
+  }
+  
+  .badge.rounded-md {
+    border-radius: 0.375rem;
+  }
+  
+  .badge.rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .badge.rounded-full {
+    border-radius: 9999px;
+  }
+  
+  .badge-pill {
+    border-radius: 9999px;
+  }
+  
+  .badge-icon-left {
+    margin-right: 0.25rem;
+  }
+  
+  .badge-icon-right {
+    margin-left: 0.25rem;
+  }
+  
+  .tooltip {
+    position: relative;
+  }
+  
+  .tooltip:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.25rem;
+    background-color: #333;
+    color: white;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  

@@ -1,4 +1,4 @@
-import { FaCheckCircle, FaHome } from "react-icons/fa";
+import { FaBeer, FaCheckCircle, FaTimesCircle, FaBell } from "react-icons/fa";
 import { Button, Box, Typography, Badge, Layout, Header } from "capui";
 
 function App() {
@@ -29,13 +29,139 @@ function App() {
         onMobileMenuToggle={(isOpen) => console.log("Mobile menu:", isOpen)}
       />
 
-      <div className="bg-gray-100 min-h-screen flex flex-col items-center ">
+      <div className="bg-gray-100 min-h-screen flex flex-col items-center">
+        {/* Box Section 1 */}
+        <Layout justify="center" className="mb-12">
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            backgroundColor="bg-gradient-to-r from-green-400 to-blue-500"
+            margin="m-10"
+            padding="p-8"
+            boxShadow="lg"
+            borderRadius="lg"
+            width="w-full sm:w-3/4 md:w-1/2"
+          >
+            <Typography
+              variant="h2"
+              fontSize="text-2xl"
+              fontWeight="bold"
+              color="text-white"
+              className="mb-4"
+            >
+              Box with Centered Content, Shadow, and Rounded Corners
+            </Typography>
+            <Typography variant="p" fontSize="text-base" color="text-white">
+              This box is centered, has a gradient background, shadow, and
+              rounded corners.
+            </Typography>
+          </Box>
+        </Layout>
+
+        {/* Box Section 2 */}
+        <Layout justify="center" className="mb-12">
+          <Box
+            padding="p-6"
+            backgroundColor="bg-gradient-to-r from-gray-600 to-gray-800"
+            color="white"
+            height="h-64"
+            borderRadius="lg"
+            boxShadow="lg"
+            width="w-full sm:w-3/4 md:w-1/2"
+          >
+            <Typography
+              variant="h1"
+              textAlign="center"
+              fontWeight="bold"
+              margin="mb-4"
+            >
+              This is an H1 Heading
+            </Typography>
+            <Typography variant="p" color="gray" fontSize="18px">
+              This is a paragraph with customized font size.
+            </Typography>
+            <Typography variant="small" color="blue" textAlign="right">
+              This is some small text aligned to the right.
+            </Typography>
+          </Box>
+        </Layout>
+
+        {/* Badge Section */}
+        <Layout direction="row" justify="center" spacing="space-x-4" className="mb-12">
+          {/* 1. Simple Solid Badge */}
+          <Badge color="blue" size="md" variant="solid" textColor="white">
+            New
+          </Badge>
+
+          {/* 2. Outline Badge */}
+          <Badge color="green" size="md" variant="outline" textColor="black">
+            Success
+          </Badge>
+
+          {/* 3. Small Badge with Icon Left */}
+          <Badge
+            color="yellow"
+            size="sm"
+            variant="solid"
+            textColor="white"
+            icon={<FaCheckCircle />}
+            positionIcon="left"
+          >
+            Verified
+          </Badge>
+
+          {/* 4. Large Badge with Icon Right */}
+          <Badge
+            color="red"
+            size="lg"
+            variant="outline"
+            textColor="black"
+            icon={<FaTimesCircle />}
+            positionIcon="right"
+          >
+            Expired
+          </Badge>
+
+          {/* 5. Pill Badge */}
+          <Badge color="purple" size="md" variant="solid" isPill>
+            New Feature
+          </Badge>
+        </Layout>
+
+        {/* Full Screen Box Section */}
+        <Layout justify="center" className="mb-12">
+          <Box
+            backgroundColor="bg-gradient-to-r from-teal-400 to-blue-500"
+            height="h-screen"
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            padding="p-8"
+          >
+            <Typography
+              variant="h1"
+              fontSize="text-4xl"
+              fontWeight="bold"
+              color="text-white"
+              className="mb-4"
+            >
+              Full Screen Box with Gradient
+            </Typography>
+            <Typography variant="p" fontSize="text-lg" color="text-white">
+              This box covers the full screen and has a gradient background from teal to blue.
+            </Typography>
+          </Box>
+        </Layout>
+
         {/* Button Section */}
         <Layout
           direction="row"
           justify="center"
           spacing="space-x-6"
-          className="mb-10"
+          className="mb-12"
         >
           <Button
             variant="primary"
@@ -59,9 +185,7 @@ function App() {
           >
             Right Aligned Button
           </Button>
-          {/* Basic usage */}
           <Button variant="primary">Click me</Button>
-          {/* Complex usage */}
           <Button
             variant="secondary"
             size="lg"
@@ -74,211 +198,18 @@ function App() {
           </Button>
         </Layout>
 
-        {/* Box Section 1 */}
-        <Layout justify="center" className="mb-10">
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            backgroundColor="bg-gradient-to-r from-green-400 to-blue-500"
-            margin="m-10"
-            padding="p-8"
-            boxShadow="lg"
-            borderRadius="lg"
-          >
-            <Typography
-              variant="h2"
-              fontSize="text-2xl"
-              fontWeight="bold"
-              color="text-white"
-            >
-              Box with Centered Content, Shadow, and Rounded Corners
-            </Typography>
-            <Typography variant="p" fontSize="text-base" color="text-white">
-              This box is centered, has a gradient background, shadow, rounded
-              corners, and a black border.
-            </Typography>
-          </Box>
-        </Layout>
-
-        {/* Box Section 2 */}
-        <Layout justify="center" className="mb-10">
-          <Box
-            padding="p-6"
-            backgroundColor="bg-gradient-to-r from-gray-600 to-gray-800"
-            color="white"
-            height="h-64"
-            borderRadius="lg"
-            boxShadow="lg"
-          >
-            <Typography
-              variant="h1"
-              textAlign="center"
-              fontWeight="bold"
-              margin="20px"
-              padding="10px"
-            >
-              This is an H1 Heading
-            </Typography>
-
-            <Typography variant="p" color="gray" fontSize="18px">
-              This is a paragraph with customized font size.
-            </Typography>
-
-            <Typography variant="small" color="blue" textAlign="right">
-              This is some small text aligned to the right.
-            </Typography>
-          </Box>
-        </Layout>
-
-        {/* Box Section 3 */}
-        <Layout justify="center" className="mb-10">
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            backgroundColor="bg-indigo-500"
-            border="1px solid white"
-            margin="m-10"
-            padding="p-8"
-            boxShadow="sm"
-            borderRadius="md"
-            width="w-1/2"
-          >
-            <Typography
-              variant="h2"
-              fontSize="text-2xl"
-              fontWeight="bold"
-              color="text-white"
-            >
-              Box with Border and Shadow
-            </Typography>
-            <Typography variant="p" fontSize="text-base" color="text-white">
-              This box has an indigo background, white border, and a small
-              shadow. It's half-width.
-            </Typography>
-          </Box>
-        </Layout>
-
-        {/* Full Screen Box Section */}
-        <Layout justify="center" className="mb-10">
-          <Box
-                      backgroundColor="bg-gradient-to-r from-teal-400 to-blue-500"
-            height="h-screen"
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Typography
-              variant="h1"
-              fontSize="text-4xl"
-              fontWeight="bold"
-              color="text-white"
-            >
-              Full Screen Box with Gradient
-            </Typography>
-            <Typography variant="p" fontSize="text-lg" color="text-white">
-              This box covers the full screen and has a gradient background from
-              teal to blue.
-            </Typography>
-          </Box>
-        </Layout>
-
-        {/* Typography Section */}
-        <Layout
-          direction="column"
-          align="center"
-          spacing="space-y-6"
-          className="mb-10"
-        >
-          <Typography
-            variant="h1"
-            fontSize="text-4xl"
-            fontWeight="bold"
-            textAlign="center"
-            margin="mb-6"
-            color="text-blue-600"
-          >
-            Heading 1: This is a large centered heading
+        {/* Icon Section (Kept as requested) */}
+        <Layout direction="row" justify="center" spacing="space-x-4" className="mb-12">
+          <Typography variant="h2" fontSize="text-2xl" fontWeight="bold" color="text-gray-800">
+            Icons Showcase
           </Typography>
-
-          <Typography
-            variant="h2"
-            fontSize="text-3xl"
-            fontWeight="semibold"
-            margin="mb-4"
-            color="text-gray-800"
-          >
-            Heading 2: This is a medium heading with a different font weight
-          </Typography>
-
-          <Typography
-            variant="p"
-            fontSize="text-base"
-            lineHeight="leading-relaxed"
-            color="text-gray-700"
-            margin="mb-4"
-          >
-            Paragraph text with normal font size, relaxed line height, and
-            custom color.
-          </Typography>
-
-          <Typography variant="span" fontSize="text-sm" color="text-green-500">
-            This is a small, inline text element.
-          </Typography>
-
-          <Typography variant="small" fontSize="text-xs" color="text-gray-500">
-            This is a small element with gray text.
-          </Typography>
+          <div className="flex items-center space-x-2">
+            <FaBeer size={30} color="text-yellow-500" />
+            <FaCheckCircle size={30} color="text-green-500" />
+            <FaTimesCircle size={30} color="text-red-500" />
+            <FaBell size={30} color="text-blue-500" />
+          </div>
         </Layout>
-
-        {/* Badge Section */}
-        <Layout
-          direction="row"
-          justify="center"
-          spacing="space-x-4"
-          className="mb-10"
-        >
-          <Badge
-            color="green"
-            size="sm"
-            icon={<FaCheckCircle />}
-            positionIcon="left"
-          >
-            Success
-          </Badge>
-
-          <Badge
-            color="red"
-            size="lg"
-            variant="outline"
-            textColor="black"
-            icon={<FaHome />}
-            positionIcon="right"
-          >
-            Home
-          </Badge>
-
-          <Badge
-            color="blue"
-            size="md"
-            isPill
-            tooltip="This is a pill badge"
-            className="cursor-pointer"
-          >
-            New
-          </Badge>
-        </Layout>
-
-        {/* Icon Section */}
-        {/* <Layout direction="row" justify="center" spacing="space-x-4" className="mb-10">
-          <Icon icon={<FaHome />} size="text-2xl" color="text-blue-500" />
-          <Icon icon={<FaSearch />} size="text-2xl" color="text-gray-600" />
-          <Icon icon={<FaCheckCircle />} size="text-3xl" color="text-green-600" />
-        </Layout> */}
       </div>
     </>
   );
