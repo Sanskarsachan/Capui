@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import Dropdown from '../Dropdown/Dropdown';
 import './Header.css';
+import { Dropdown } from 'capui';
 
 interface NavItem {
   label: string;
