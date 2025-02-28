@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import './Header.css';
-import { Dropdown } from 'capui';
+import Dropdown from '../Dropdown/Dropdown';
 
 interface NavItem {
   label: string;
@@ -43,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({
   containerWidth = 'contained',
   height = 'h-16',
   position = 'static',
-  backgroundColor = 'white',
+  backgroundColor = 'black',
   textColor = 'gray-900',
   activeTextColor = 'gray-900',
   hoverTextColor = 'gray-600',
@@ -59,7 +59,6 @@ const Header: React.FC<HeaderProps> = ({
   className = '',
   logoClassName = '',
   navClassName = '',
-  dropdownClassName = '',
   mobileMenuClassName = '',
   onMobileMenuToggle,
   onDropdownToggle,

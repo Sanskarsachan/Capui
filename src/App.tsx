@@ -4,34 +4,33 @@ import { Button, Box, Typography, Badge, Layout, Header } from "capui";
 function App() {
   return (
     <>
-      {/* Header Section */}
-      <Header
-      logo={<img src="/logo.svg" alt="Capui" className="w-auto h-10" />}
-      navigationItems={[
-        {
-          label: "Products",
-          items: ["Features", "Pricing"],
-          href: "/products",
-        },
-        {
-          label: "Resources",
-          items: ["Blog", "Documentation"],
-          href: "/resources",
-        },
-      ]}
-      containerWidth="contained"
-      height="h-20"
-      position="sticky"
-      backgroundColor="bg-white"
-      textColor="text-gray-900"
-      activeTextColor="text-blue-600" // Example active color for text
-      hoverTextColor="text-gray-600"  // Example hover color for text
-      shadow="lg"
-      padding="px-6"
-      onMobileMenuToggle={(isOpen) => console.log("Mobile menu:", isOpen)}
-    />
-
-      <div className="bg-gray-100 min-h-screen flex flex-col items-center">
+      <div className="bg-white-100 min-h-screen flex flex-col items-center">
+        {/* Header Section */}
+        <Header
+          logo={<img src="/logo.svg" alt="Capui" className="w-auto h-2s0" />}
+          navigationItems={[
+            {
+              label: "Products",
+              items: ["Features", "Pricing"],
+              href: "/products",
+            },
+            {
+              label: "Resources",
+              items: ["Blog", "Documentation"],
+              href: "/resources",
+            },
+          ]}
+          containerWidth="contained"
+          height="h-40"
+          position="sticky"
+          backgroundColor="grey"
+          textColor="text-gray-900"
+          activeTextColor="text-blue-600" // Example active color for text
+          hoverTextColor="text-gray-600" // Example hover color for text
+          shadow="lg"
+          padding="px-9"
+          onMobileMenuToggle={(isOpen) => console.log("Mobile menu:", isOpen)}
+        />
         {/* Box Section 1 */}
         <Layout justify="center" className="mb-12">
           <Box
@@ -91,7 +90,12 @@ function App() {
         </Layout>
 
         {/* Badge Section */}
-        <Layout direction="row" justify="center" spacing="space-x-4" className="mb-12">
+        <Layout
+          direction="row"
+          justify="center"
+          spacing="space-x-4"
+          className="mb-12"
+        >
           {/* 1. Simple Solid Badge */}
           <Badge color="blue" size="md" variant="solid" textColor="white">
             New
@@ -153,7 +157,8 @@ function App() {
               Full Screen Box with Gradient
             </Typography>
             <Typography variant="p" fontSize="text-lg" color="text-white">
-              This box covers the full screen and has a gradient background from teal to blue.
+              This box covers the full screen and has a gradient background from
+              teal to blue.
             </Typography>
           </Box>
         </Layout>
@@ -201,8 +206,18 @@ function App() {
         </Layout>
 
         {/* Icon Section (Kept as requested) */}
-        <Layout direction="row" justify="center" spacing="space-x-4" className="mb-12">
-          <Typography variant="h2" fontSize="text-2xl" fontWeight="bold" color="text-gray-800">
+        <Layout
+          direction="row"
+          justify="center"
+          spacing="space-x-4"
+          className="mb-12"
+        >
+          <Typography
+            variant="h2"
+            fontSize="text-2xl"
+            fontWeight="bold"
+            color="text-gray-800"
+          >
             Icons Showcase
           </Typography>
           <div className="flex items-center space-x-2">
